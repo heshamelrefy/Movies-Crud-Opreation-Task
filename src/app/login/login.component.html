@@ -1,0 +1,48 @@
+<section id="signIn">
+    <div class="container">
+        
+        <form [formGroup]="signIn" (ngSubmit)="signIn.valid&&FormData()">
+        <div  class="row " >
+            
+           
+            <div class="col-md-12 col-sm-12 mb-3">
+                <input [class.is-valid]="signIn.get('email')?.status=='VALID'" type="text" class=" form-control" formControlName="email" placeholder="Enter Your E-mail">
+              
+                <div *ngIf="signIn.get('email')?.invalid &&signIn.get('email')?.touched">
+                    <small class="text-danger"
+                        *ngIf="signIn.get('email')?.errors?.['required']">
+                        Email is required
+                    </small>
+                        <small class="text-danger"
+                        *ngIf="signIn.get('email')?.errors?.['pattern']">
+                        You cannot enter for Example@gmail.com
+                        </small>
+                </div>
+            </div>
+           
+            <div class="col-md-12 col-sm-12">
+                <input [class.is-valid]="signIn.get('password')?.status=='VALID'" type="password" class=" form-control" formControlName="password" placeholder="Enter Password">
+                
+                <div *ngIf="signIn.get('password')?.invalid &&signIn.get('password')?.touched">
+                    <small class="text-danger"
+                        *ngIf="signIn.get('password')?.errors?.['required']">
+                        Password is required
+                    </small>
+                        <small class="text-danger"
+                        *ngIf="signIn.get('password')?.errors?.['minLength']">
+                        Password is min 6 characters or 6 number
+                        </small>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 mt-3">
+                <button 
+                [disabled]="signIn.invalid" [style.backgroundColor]="signIn.invalid? 'gray':'#17a2b8'"  
+                [style.border]="signIn.invalid? 'gray':'#17a2b8'"
+                class="btn btn-primary w-100 ">Sign In</button>
+                <div *ngIf="inccorectPassword"  class="col-md-12 alert alert-danger text-center">This password or email is wrong</div>
+
+            </div>
+        </div>
+        </form>
+    </div>
+</section>

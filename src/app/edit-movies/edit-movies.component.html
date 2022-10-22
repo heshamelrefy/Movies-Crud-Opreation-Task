@@ -1,0 +1,63 @@
+<div class="overlay">
+    <div class="overlay-form w-50  h-50">
+    <div class="card">
+        <div class="overlay"></div>
+       
+        <form action="" [formGroup]="editMovieForm" >
+          <div class="logo">
+            <!-- <img src="../../assets/logo.png" alt=""> -->
+            <h3>Edit Movies</h3>
+          </div>
+          <div class="row">
+            <div class="form-group col-12">
+             
+              <div class="movieName">
+
+                <input required type="text" placeholder="Movie Name" name="name" formControlName="name">
+            </div>
+            <div *ngIf="name?.invalid &&name?.touched">
+              <small class="text-danger" *ngIf="name?.errors?.['required']"> Movie Name is required</small>
+            </div>
+            </div>
+            <div class="form-group col-12">
+             
+                <div class="description">
+  
+                  <input required type="text" placeholder="Movie description" name="description" formControlName="description">
+              </div>
+              <div *ngIf="description?.invalid &&description?.touched">
+                <small class="text-danger" *ngIf="description?.errors?.['required']"> Movie description is required</small>
+              </div>
+              </div>
+              <div class="form-group col-12">
+              <div class="category_id">
+              <select formControlName="category_id">
+                <option *ngFor="let category of allCategories" [value]="category.id" >{{category.name}}</option>
+              </select>
+              </div>
+              <div *ngIf="category_id?.invalid &&category_id?.touched">
+                <small class="text-danger" *ngIf="category_id?.errors?.['required']"> Movie category_id is required</small>
+              </div>
+              </div>
+          </div>
+
+          <div class="form-group col-12">
+            <!-- moviePicture -->
+            <div class="moviePicture">
+              <span>Uploud Image<i class="fa-solid fa-upload pe-2"></i></span>
+              <input  type="file" (change)="selectedImg($event)" name="image" formControlName="image">
+            </div>
+            <div *ngIf="image?.invalid &&image?.touched">
+              <small class="text-danger" *ngIf="image?.errors?.['required']">Movie Iamge is required</small>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <button type="submit" class="formBtn btn btn-success" [disabled]="editMovieForm.invalid" (click)="editMovies()">Updat</button>
+          <button routerLink="/home" type="button" class="formBtn btn btn-danger">Cancel </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+
+

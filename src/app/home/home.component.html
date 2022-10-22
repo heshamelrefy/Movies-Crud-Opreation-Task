@@ -1,0 +1,34 @@
+<div class="container mt-5" style=" position: relative;">
+    <div class="text-end py-3">
+        <!-- <button class="btn btn-info " routerLink="/home/create"></button> -->
+    </div>
+    <div class="text-end my-5">
+        <button class="btn btn-info " routerLink="/home/create">Create Movie</button>
+    </div>
+    <div class="col-md-12 my-5 d-flex align-items-center ">
+        <button class="btn btn-info " (click)="clearFilter()">clear filter</button>
+        <label for="category">Choose your category from the list by filter:</label>
+    
+
+        <select id="category" [(ngModel)]='term'  class="form-control w-50 mx-3">
+            
+            <option *ngFor="let category of allCategories" [value]="category.id" >{{category.name}}</option>
+          </select>
+    </div>
+    <router-outlet ></router-outlet>
+<div class="row p-2" >
+    <div *ngFor="let movie of this._MoviesServies.movies | searchCategory:term;let i =index" class="p-4 col-md-4 " >
+        <img [src]="imgPerfix+movie.image" class=" w-100" alt="not found">
+        <div class="">
+          <h5 class="">{{movie?.name}}</h5>
+          <p class="">{{movie?.description}}</p>
+          <a  class="btn btn-success" routerLink="home/edit" [routerLink]="['/home/edit',movie.id]" >Edit</a>
+          <a  class="btn btn-danger" (click)="popupForDelete(movie.id)">Delete</a>
+          
+        </div>
+      </div>
+</div>
+</div>
+
+
+
